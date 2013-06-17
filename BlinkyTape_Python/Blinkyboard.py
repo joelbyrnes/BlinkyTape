@@ -27,6 +27,8 @@ class Blinkyboard_WS2811:
   def show(self):
     self.serial.write(chr(255))
     self.serial.flush()
+    # gives the arduino time to read serial buffer and update - dependent upon arduino type and serial speed.
+    time.sleep(0.025)
 
 class Blinkyboard_LPD8806:
   def __init__(self, port):

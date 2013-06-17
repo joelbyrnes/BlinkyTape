@@ -40,12 +40,15 @@ void setup() {
                       buffOffX, buffOffY,
                       buffScale * buffer.width,
                       buffScale * buffer.height);
-                      
+  
+  println(Serial.list());
+
+  // TODO: use a properties file to store config
   for(String p : Serial.list()) {
-//    if(p.startsWith("/dev/cu.usbmodem")) {
-//      led = new LedOutput(this, p, 60);
-//      break;  // TODO: does this work?
-//    }
+    if(p.startsWith("/dev/cu.usbserial")) {
+      led = new LedOutput(this, p, 60);
+      break;
+    }
   }
 
   controlP5 = new ControlP5(this);
@@ -112,7 +115,7 @@ void draw() {
   updatePos();
   
   drawCrosshair();
-  
+
   if(led != null) {
     led.sendUpdate(buffer, pos, 0, pos, buffer.height);
   }

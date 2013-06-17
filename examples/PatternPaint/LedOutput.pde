@@ -60,13 +60,31 @@ class LedOutput
     }
     
 // For WS2811
-    data[dataIndex++] = (byte)255;
+    //data[dataIndex++] = (byte)255;
 
 // For LPD8806
 //    data[dataIndex++] = (byte)0;
+
+    // wait for "x\n" sync line
+    boolean synced = false;
+    while (!synced) {
+      if (m_outPort.available() > 1) {
+        byte[] inBuffer = new byte[3];
+        int bytesRead = m_outPort.readBytesUntil('\n', inBuffer);
+        if (bytesRead > 0 && inBuffer != null) {
+          String myString = new String(inBuffer);
+          //print("\'" + myString + "\'");
+          if (inBuffer[0] == 'x') {
+            //println("received sync");
+            synced = true;
+          }
+          else println("received " + myString + " ???");
+        }
+      } //else println ("serial chars not available");
+    }
     
     // Don't send data too fast, the arduino can't handle it.
-    int maxChunkSize = 5;
+    int maxChunkSize = 32;
     for(int currentChunkPos = 0; currentChunkPos < m_numberOfLEDs*3 + 1; currentChunkPos += maxChunkSize) {
       int currentChunkSize = min(maxChunkSize, m_numberOfLEDs*3 + 1 - currentChunkPos);
       byte[] test = new byte[currentChunkSize];
