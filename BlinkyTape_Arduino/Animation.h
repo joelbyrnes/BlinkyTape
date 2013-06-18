@@ -21,8 +21,9 @@ class Animation {
   prog_uint8_t* currentFrameData;
 
   void drawNoEncoding(Adafruit_NeoPixel& strip);  
+  void drawRLE(Adafruit_NeoPixel& strip);
   void draw16bitRLE(Adafruit_NeoPixel& strip);
-  
+
  public:
   Animation();
   Animation(uint16_t frameCount, const prog_uint8_t* frameData, const uint8_t encoding, const uint8_t ledCount);

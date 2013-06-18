@@ -1,4 +1,7 @@
+#ifndef _ADAFRUIT_NEOPIXEL_H
+#define _ADAFRUIT_NEOPIXEL_H
 #include <Adafruit_NeoPixel.h>
+#endif
 
 #include <avr/pgmspace.h>
 #include <Animation.h>
@@ -7,7 +10,7 @@
 #define LED_COUNT 60
 #define THRESHOLD 1
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 5, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, 11, NEO_GRB + NEO_KHZ800);
 
 Animation pov;
 

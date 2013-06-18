@@ -1,4 +1,8 @@
+#ifndef _ADAFRUIT_NEOPIXEL_H
+#define _ADAFRUIT_NEOPIXEL_H
 #include <Adafruit_NeoPixel.h>
+#endif
+
 #include <Animation.h>
 
 #define LED_COUNT 60
