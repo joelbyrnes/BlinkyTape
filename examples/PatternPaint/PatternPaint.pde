@@ -15,10 +15,13 @@ int buffOffX = 120;
 int buffOffY = 10;
 int buffScale = 6;
 
+int numberOfLEDs = 60;
+int columns = 60;
+
 LineTool tool;
 
 void setup() {
-  buffer = createGraphics(60, 60, JAVA2D);
+  buffer = createGraphics(columns, numberOfLEDs, JAVA2D);
   size(windowWidthForBuffer(buffer), 380, JAVA2D);
 
 //  noSmooth();
@@ -46,7 +49,7 @@ void setup() {
   // TODO: use a properties file to store config
   for(String p : Serial.list()) {
     if(p.startsWith("/dev/cu.usbserial")) {
-      led = new LedOutput(this, p, 60);
+      led = new LedOutput(this, p, numberOfLEDs);
       break;
     }
   }
@@ -239,7 +242,7 @@ float screenToBuffY(float screenY) {
 }
 
 void savePattern() {
-  LedSaver saver = new LedSaver("pov", 60);
+  LedSaver saver = new LedSaver("pov", numberOfLEDs);
   for (int x = 0; x < buffer.width; x++) {
     saver.addFrame(buffer, x, 0, x, buffer.height);
   }
